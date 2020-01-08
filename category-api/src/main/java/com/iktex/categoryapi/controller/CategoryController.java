@@ -35,13 +35,23 @@ public class CategoryController {
     }
 
     @PostMapping
-    @PutMapping
-    public ResponseEntity<Category> upsert(@RequestBody Category entity) {
+    public ResponseEntity<Category> save(@RequestBody Category entity) {
         return ResponseEntity.ok(service.upsert(entity));
     }
 
+    @PutMapping
+    public ResponseEntity<Category> update(@RequestBody Category entity) {
+        return ResponseEntity.ok(service.upsert(entity));
+    }
+
+    @DeleteMapping
+    public ResponseEntity delete(@RequestBody Category entity) {
+        service.delete(entity);
+        return ResponseEntity.ok(null);
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable long id) {
+    public ResponseEntity deleteById(@PathVariable long id) {
         service.deleteById(id);
         return ResponseEntity.ok(null);
     }

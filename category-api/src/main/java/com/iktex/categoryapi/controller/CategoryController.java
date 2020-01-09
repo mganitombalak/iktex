@@ -1,12 +1,16 @@
 package com.iktex.categoryapi.controller;
 
 import com.iktex.categoryapi.entity.Category;
+import com.iktex.categoryapi.model.ResponseModel;
 import com.iktex.categoryapi.service.CategoryService;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @RestController
 @RequestMapping("/category")
@@ -20,8 +24,11 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Category>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<ResponseModel<Category>> findAll() throws UnknownHostException {
+        var returnValue =new ResponseModel<Category>();
+        returnValue.setServer(InetAddress.getLocalHost().getHostName());
+        returnValue.setData(service.findAll());
+        return ResponseEntity.ok(returnValue);
     }
 
     @GetMapping("/{id}")

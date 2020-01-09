@@ -1,12 +1,17 @@
 package com.iktex.productapi.controller;
 
 import com.iktex.productapi.entity.Product;
+import com.iktex.productapi.model.ResponseModel;
 import com.iktex.productapi.service.ProductService;
 import lombok.var;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @RestController
 @RequestMapping("/product")
@@ -19,8 +24,12 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Iterable<Product>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<ResponseModel<Product>> findAll() throws UnknownHostException {
+
+        var returnValue =new ResponseModel<Product>();
+        returnValue.setServer(InetAddress.getLocalHost().getHostName());
+        returnValue.setData(service.findAll());
+        return ResponseEntity.ok(returnValue);
     }
 
     @GetMapping("/{id}")

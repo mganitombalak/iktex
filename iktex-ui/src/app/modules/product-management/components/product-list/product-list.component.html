@@ -1,1 +1,19 @@
-<p>product-list works!</p>
+from server:{{model?.server}}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Category ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of model?.data">
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.category_id}}</td>
+        <td>{{product.name}}}</td>
+        <td>{{product.price}}</td>
+      </tr>
+    </tbody>
+  </table>

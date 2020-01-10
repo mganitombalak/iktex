@@ -4,7 +4,6 @@ import com.iktex.productapi.entity.Product;
 import com.iktex.productapi.model.ResponseModel;
 import com.iktex.productapi.service.ProductService;
 import lombok.var;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+@CrossOrigin(maxAge = 3600,origins = "*")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
